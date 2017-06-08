@@ -4,7 +4,7 @@ import { class, interface, implements } from 'sweet-interfaces';
 
 const constant = x => _ => x;
 const identity = x => x;
-const flip = f => (a, b) => f(b, c);
+const flip = f => (a, b) => f(b, a);
 
 export interface Setoid {
   // eq :: Setoid a => a ~> a -> Boolean
