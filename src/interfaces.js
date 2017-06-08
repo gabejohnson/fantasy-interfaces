@@ -1,15 +1,17 @@
+'lang sweet.js';
+
 import { class, interface, implements } from 'sweet-interfaces';
 
 const constant = x => _ => x;
 const identity = x => x;
 const flip = f => (a, b) => f(b, c);
 
-interface Setoid {
+export interface Setoid {
   // eq :: Setoid a => a ~> a -> Boolean
   eq(b) { return this === b; }
 }
 
-interface Ord extends Setoid {
+export interface Ord extends Setoid {
   // lte :: Ord a => a ~> a -> Boolean
   lte(b) { return this <= b; }
   [Setoid.eq](b) {
@@ -17,36 +19,37 @@ interface Ord extends Setoid {
   }
 }
 
-interface Semigroupoid {
+export interface Semigroupoid {
   // compose :: Semigroupoid c => c i j ~> c j k -> c i k
   compose;
 }
 
-interface Category extends Semigroupoid {
+export interface Category extends Semigroupoid {
   // id :: Category c => () -> c a a
   static id;
 }
 
-interface Semigroup {
+export interface Semigroup {
   // concat :: Semigroup a => a ~> a -> a
   concat;
 }
 
-interface Monoid extends Semigroup {
+export interface Monoid extends Semigroup {
   // empty :: Monoid m => () -> m
   static empty;
 }
 
-interface Functor {
+export interface Functor {
   // map :: Functor f => f a ~> (a -> b) -> f b
   map;
 }
 
-interface Contravariant {
+export interface Contravariant {
   // contramap :: Contravariant f => f a ~> (b -> a) -> f b
   contramap;
 }
-interface Apply extends Functor {
+
+export interface Apply extends Functor {
   // ap :: Apply f => f a ~> f (a -> b) -> f b
   ap(f) {
     this.constructor[Apply.lift](f, this);
@@ -69,7 +72,7 @@ interface Apply extends Functor {
   }
 }
 
-interface Applicative extends Apply {
+export interface Applicative extends Apply {
   // of :: Applicative f => a -> f a
   static of;
   [Functor.map](f) {
@@ -77,19 +80,19 @@ interface Applicative extends Apply {
   }
 }
 
-interface Alt extends Functor {
+export interface Alt extends Functor {
   // alt :: Alt f => f a ~> f a -> f a
   alt;
 }
 
-interface Plus extends Alt {
+export interface Plus extends Alt {
   // zero :: Plus f => () -> f a
   static zero;
 }
 
-interface Alternative extends Applicative, Plus {}
+export interface Alternative extends Applicative, Plus {}
 
-interface Foldable {
+export interface Foldable {
   // reduce :: Foldable f => f a ~> ((b, a) -> b, b) -> b
   reduce(f, init) {
     this[Foldable.reduceRight](flip(f), init);
@@ -106,7 +109,7 @@ interface Foldable {
   }
 }
 
-interface Traversable extends Functor, Foldable {
+export interface Traversable extends Functor, Foldable {
   // traverse :: Applicative f, Traversable t => t a ~> (TypeRep f, a -> f b) -> f (t b)
   traverse(typeRep, f) {
     return this[Functor.map](f).sequence(typeRep);
@@ -118,7 +121,7 @@ interface Traversable extends Functor, Foldable {
   }
 }
 
-interface Chain extends Apply {
+export interface Chain extends Apply {
   // chain :: Chain m => m a ~> (a -> m b) -> m b
   chain(f) {
     return this[Chain.join]()[Functor.map](f);
@@ -134,18 +137,18 @@ interface Chain extends Apply {
   }
 }
 
-interface ChainRec extends Chain {
+export interface ChainRec extends Chain {
   // chainRec :: ChainRec m => ((a -> c, b -> c, a) -> m c, a) -> m b
   static chainRec;
 }
 
-interface Monad extends Applicative, Chain {
+export interface Monad extends Applicative, Chain {
   [Functor.map](f) {
     return this[Chain.chain](a => this.constructor[Applicative.of](f(a)));
   }
 }
 
-interface Extend extends Functor {
+export interface Extend extends Functor {
   // extend :: Extend w => w a ~> (w a -> b) -> w b
   extend(f) {
     return this[Extend.duplicate]()[Functor.map](f);
@@ -157,12 +160,12 @@ interface Extend extends Functor {
   }
 }
 
-interface Comonad extends Extend {
+export interface Comonad extends Extend {
   // extract :: Comonad w => w a ~> () -> a
   extract;
 }
 
-interface Bifunctor extends Functor {
+export interface Bifunctor extends Functor {
   // bimap :: Bifunctor f => f a c ~> (a -> b, c -> d) -> f b d
   bimap(f, g) {
     return this[Bifunctor.lmap](f)[Bifunctor.rmap](g);
@@ -181,7 +184,7 @@ interface Bifunctor extends Functor {
   [Functor.map](f) { return this[Bifunctor.bimap](identity, f); }
 }
 
-interface Profunctor extends Functor {
+export interface Profunctor extends Functor {
   // promap :: Profunctor p => p b c ~> (a -> b, c -> d) -> p a d
   promap(f, g) {
     return this[Profunctor.lmap](f)[Profunctor.rmap](g);
