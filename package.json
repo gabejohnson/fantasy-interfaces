@@ -1,0 +1,31 @@
+{
+  "name": "fantasy-interfaces",
+  "version": "0.0.1",
+  "description": "JavaScript \"native\" interfaces for Fantasy Land",
+  "main": "index.js",
+  "scripts": {
+    "build": "sjs src/interfaces.js --out-file index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabejohnson/fantasy-interfaces.git"
+  },
+  "keywords": [
+    "interfaces",
+    "macros",
+    "sweet.js",
+    "fantasy-land",
+    "algebraic"
+  ],
+  "author": "Gabe Johnson <gijohnson105@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabejohnson/fantasy-interfaces/issues"
+  },
+  "homepage": "https://github.com/gabejohnson/fantasy-interfaces#readme",
+  "dependencies": {
+    "@sweet-js/cli": "^3.0.8",
+    "sweet-interfaces": "^0.2.0"
+  }
+}
