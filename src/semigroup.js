@@ -2,15 +2,14 @@ import { implements, interface } from 'sweet-interfaces';
 
 interface Semigroup {
   // concat :: Semigroup a => a ~> a -> a
-  concat;
+  concat(b) {
+    return this.concat(b);
+  };
 }
 // TODO: change to default export once sweet-js/sweet-core/issues/620 ships
 export { Semigroup };
 
-String.prototype[concat] = String.prototype.concat;
 String implements Semigroup;
-
-Array.prototype[concat] = Array.prototype.concat;
 Array implements Semigroup;
 
 Object.prototype[concat] = function concat(b) {
