@@ -4,7 +4,7 @@
   "description": "JavaScript \"native\" interfaces for Fantasy Land",
   "main": "index.js",
   "scripts": {
-    "build": "sjs src/interfaces.js --out-file index.js",
+    "build": "sjs src/index.js --out-file index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
