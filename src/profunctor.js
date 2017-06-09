@@ -1,11 +1,10 @@
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
-import { Contravariant } from './contravariant';
 import { Category } from './category';
 
 const identity = Function[Category.id]();
 
-interface Profunctor extends Functor, Contravariant {
+interface Profunctor extends Functor {
   // promap :: Profunctor p => p b c ~> (a -> b, c -> d) -> p a d
   promap(f, g) {
     return this[Profunctor.lmap](f)[Profunctor.rmap](g);
@@ -28,9 +27,6 @@ interface Profunctor extends Functor, Contravariant {
 
   [Functor.map](f) {
     return this[Profunctor.promap](identity, f);
-  }
-  [Contravariant.contramap](f) {
-    return this[Profunctor.promap](f, identity);
   }
 }
 // TODO: change to default export once sweet-js/sweet-core/issues/620 ships
