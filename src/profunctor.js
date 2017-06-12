@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Category } from './category';
@@ -29,8 +31,6 @@ interface Profunctor extends Functor {
     return this[Profunctor.promap](identity, f);
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Profunctor };
 
 Function.prototype[Profunctor.promap] = function promap(f, g) {
   return x => g(this(f(x)));
@@ -39,3 +39,5 @@ Function.prototype[Profunctor.lmap] = Function.prototype[Contravariant.contramap
 Function.prototype[Profunctor.rmap] = Function.prototype[Functor.map];
 
 Function implements Profunctor;
+
+export { Profunctor };

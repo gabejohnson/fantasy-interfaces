@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Apply } from './apply';
@@ -18,8 +20,6 @@ interface Chain extends Apply {
     return m[Chain.chain](f => this[Functor.map](f));
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Chain };
 
 const { chain } = Chain;
 
@@ -34,3 +34,5 @@ Function.prototype[chain] = function chain(f) {
   return x => f(this(x))(x);
 };
 Function implements Chain;
+
+export { Chain };

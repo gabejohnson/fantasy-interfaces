@@ -1,7 +1,9 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 
-interface Bifunctor extends Functor {
+export interface Bifunctor extends Functor {
   // bimap :: Bifunctor f => f a c ~> (a -> b, c -> d) -> f b d
   bimap(f, g) {
     return this[Bifunctor.first](f)[Bifunctor.second](g);
@@ -19,5 +21,3 @@ interface Bifunctor extends Functor {
 
   [Functor.map](f) { return this[Bifunctor.bimap](identity, f); }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Bifunctor };

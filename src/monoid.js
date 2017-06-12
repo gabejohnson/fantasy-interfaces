@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
 import { Semigroup } from './semigroup';
 
@@ -5,8 +7,6 @@ interface Monoid extends Semigroup {
   // empty :: Monoid m => () -> m
   static empty;
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Monoid };
 
 const { empty } = Monoid;
 
@@ -18,3 +18,5 @@ Array implements Monoid;
 
 Object[empty] = () => ({});
 Object implements Monoid;
+
+export { Monoid };

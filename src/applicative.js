@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
 import { Apply } from './apply';
 import { Functor } from './functor';
@@ -9,8 +11,6 @@ interface Applicative extends Apply {
     return this[Apply.ap](this.constructor[Applicative.of](f));
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Applicative };
 
 const { of } = Applicative;
 
@@ -21,3 +21,5 @@ Array implements Applicative;
 
 Function[of] = x => _ => x;
 Function implements Applicative;
+
+export { Applicative };

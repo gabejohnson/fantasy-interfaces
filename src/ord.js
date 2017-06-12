@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
 import { Setoid } from './setoid';
 
@@ -8,8 +10,6 @@ interface Ord extends Setoid {
     return this[Ord.lte](b) && b[Ord.lte](this);
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Ord };
 
 const { lte } = Ord;
 
@@ -55,3 +55,5 @@ Object.prototype[lte] = function lte(b) {
   }
 };
 Object implements Ord;
+
+export { Ord };

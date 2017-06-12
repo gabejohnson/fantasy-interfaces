@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Category } from './category';
@@ -13,8 +15,6 @@ interface Extend extends Functor {
     return this[Extend.extend](Function[Category.id]);
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Extend };
 
 const { extend, duplicate } = Extend;
 
@@ -33,3 +33,5 @@ Function.prototype[duplicate] = function duplicate() {
   return x => y => this(x.concat(y));
 };
 Function implements Extend;
+
+export { Extend };

@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
 import { Chain } from './chain';
 
@@ -5,8 +7,6 @@ interface ChainRec extends Chain {
   // chainRec :: ChainRec m => ((a -> c, b -> c, a) -> m c, a) -> m b
   static chainRec;
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { ChainRec };
 
 const { chainRec } = ChainRec;
 
@@ -39,3 +39,5 @@ Function[chainRec] = function chainRec(f, x) {
   };
 };
 Function implements ChainRec;
+
+export { ChainRec };

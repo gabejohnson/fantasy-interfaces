@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Apply } from './apply';
@@ -15,8 +17,6 @@ interface Traversable extends Functor, Foldable {
     return this.traverse(typeRep, identity);
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Traverable };
 
 const { traverse } = Traversable;
 const { lift } = Apply;
@@ -48,3 +48,5 @@ Object.prototype[traverse] =   function traverse(typeRep, f) {
             , typeRep[Applicative.of]({}));
 }
 Object implements Traversable;
+
+export { Traversable };

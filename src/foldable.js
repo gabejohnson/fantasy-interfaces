@@ -1,3 +1,5 @@
+'lang sweet.js';
+
 import { interface, implements } from 'sweet-interfaces';
 
 const flip = f => (a, b) => f(b, a);
@@ -18,8 +20,6 @@ interface Foldable {
     return this[Foldable.reduce]((acc, a) => f(a)[Semigroup.concat](acc), typeRep[Monoid.empty]());
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Foldable };
 
 const { reduce } = Foldable;
 
@@ -35,3 +35,5 @@ Object.prototype[reduce] = function reduce(f, init) {
     .reduce((acc, k) => f(acc, this[k]), init);
 };
 Object implements Foldable;
+
+export { Foldable };

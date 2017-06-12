@@ -1,11 +1,11 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
 
 interface Setoid {
   // equals :: Setoid a => a ~> a -> Boolean
   equals(b) { return this.valueOf() === b.valueOf(); }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Setoid };
 
 const { equals } = Setoid;
 
@@ -40,3 +40,5 @@ Object.prototype[equals] = function equals(b) {
     keys.every(k => this[k][equals](other[k]));
 };
 Object implements Setoid;
+
+export { Setoid };

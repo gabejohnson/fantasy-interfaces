@@ -1,5 +1,7 @@
+'lang sweet.js';
+
 import { implements, interface } from 'sweet-interfaces';
-import { Functor } from 'Functor';
+import { Functor } from './functor';;
 
 interface Apply extends Functor {
   // ap :: Apply f => f a ~> f (a -> b) -> f b
@@ -23,10 +25,8 @@ interface Apply extends Functor {
     this.constructor[Apply.lift](constant(identity), this, y);
   }
 }
-// TODO: change to default export once sweet-js/sweet-core/issues/620 ships
-export { Apply };
 
-const { ap } from Apply;
+const { ap } = Apply;
 
 Array.prototype[ap] = function ap(fs) {
   const result = [];
@@ -50,3 +50,5 @@ Function.prototype[ap] = function ap(f) {
   return x => f(x)(this(x));
 };
 Function implements Apply;
+
+export { Apply };
