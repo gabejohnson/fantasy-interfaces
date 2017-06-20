@@ -1,12 +1,12 @@
 'lang sweet.js';
 
 import { implements, interface } from 'sweet-interfaces';
-import { Functor } from './functor';;
+import { Functor } from './functor';
 
 interface Apply extends Functor {
   // ap :: Apply f => f a ~> f (a -> b) -> f b
   ap(f) {
-    this.constructor[Apply.lift](f, this);
+    this.constructor[Apply.lift](x => x, f, this);
   }
 
   // lift :: Apply f => (a -> b -> ... -> c) -> f a -> f b -> ... -> f c
