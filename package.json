@@ -4,7 +4,9 @@
   "description": "JavaScript \"native\" interfaces for Fantasy Land",
   "main": "index.js",
   "scripts": {
-    "build": "sjs src/index.js --out-file index.js",
+    "prebuild": "mkdir -p tmp dist",
+    "build": "sjs src/* --out-dir tmp/ && babel tmp/ --out-dir dist/",
+    "postbuild": "rm -rf tmp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,5 +29,9 @@
   "dependencies": {
     "@sweet-js/cli": "^3.0.11",
     "sweet-interfaces": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
   }
 }
