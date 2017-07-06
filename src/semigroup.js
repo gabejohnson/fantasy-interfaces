@@ -12,7 +12,7 @@ interface Semigroup {
 String implements Semigroup;
 Array implements Semigroup;
 
-Object.prototype[concat] = function concat(b) {
+Object.prototype[Semigroup.concat] = function concat(b) {
   const result = {};
   let k;
   for (k in this) result[k] = this[k];
