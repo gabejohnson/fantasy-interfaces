@@ -2,6 +2,9 @@
 
 import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
+import { id } from './category';
+
+const identity = id(Function);
 
 protocol Bifunctor extends Functor {
   // bimap :: Bifunctor f => f a c ~> (a -> b, c -> d) -> f b d

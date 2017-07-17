@@ -2,9 +2,9 @@
 
 import { implements, protocol } from 'sweet-interfaces';
 import { Functor } from './functor';
+import { id } from './category';
 
 const constant = k => () => k;
-const identity = x => x;
 
 protocol Apply extends Functor {
   // ap :: Apply f => f a ~> f (a -> b) -> f b
@@ -25,7 +25,7 @@ protocol Apply extends Functor {
 
   // apSecond :: Apply f => f a ~> f b -> f b
   apSecond(y) {
-    this.constructor[Apply.lift](constant(identity), this, y);
+    this.constructor[Apply.lift](constant(id(Function)), this, y);
   }
 }
 

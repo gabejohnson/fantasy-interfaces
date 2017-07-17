@@ -5,6 +5,9 @@ import { Functor } from './functor';
 import { Apply, lift } from './apply';
 import { Applicative } from './applicative';
 import { Foldable } from './foldable';
+import { id } from './category';
+
+const identity = id(Function);
 
 protocol Traversable extends Functor, Foldable {
   // traverse :: Applicative f, Traversable t => t a ~> (TypeRep f, a -> f b) -> f (t b)

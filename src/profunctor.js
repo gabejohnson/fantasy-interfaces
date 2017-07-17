@@ -2,9 +2,9 @@
 
 import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
-import { Category } from './category';
+import { id } from './category';
 
-const identity = Function[Category.id]();
+const identity = id(Function);
 
 protocol Profunctor extends Functor {
   // promap :: Profunctor p => p b c ~> (a -> b, c -> d) -> p a d
