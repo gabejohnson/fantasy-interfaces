@@ -15,4 +15,6 @@ Array implements Alt;
 Object.prototype[Alt.alt] = Object.prototype[Semigroup.concat];
 Object implements Alt;
 
-export { Alt };
+const alt = (a, b) => a[Alt.alt](b);
+
+export { Alt, alt };

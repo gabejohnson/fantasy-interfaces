@@ -10,4 +10,6 @@ protocol Category extends Semigroupoid {
 Function[Category.id] = x => x;
 Function implements Category;
 
-export { Category };
+const id = typeRep => x => typeRep[Category.id](x);
+
+export { Category, id };

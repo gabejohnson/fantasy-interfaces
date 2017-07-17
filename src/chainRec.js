@@ -8,13 +8,11 @@ protocol ChainRec extends Chain {
   static chainRec;
 }
 
-const { chainRec } = ChainRec;
-
 const iterate = done => value => ({ value, done });
 const cont = iterate(false);
 const stop = iterate(true);
 
-Array[chainRec] = function chainRec(f, x) {
+Array[ChainRec.chainRec] = function chainRec(f, x) {
   const remaining = [x];
   const complete = [];
   while (remaining.length > 0) {
@@ -31,7 +29,7 @@ Array[chainRec] = function chainRec(f, x) {
 };
 Array implements ChainRec;
 
-Function[chainRec] = function chainRec(f, x) {
+Function[ChainRec.chainRec] = function chainRec(f, x) {
   return a => {
     let { value, done } = cont(x);
     while (!done) ({ value, done } = f(cont, stop, value)(a));
@@ -40,4 +38,6 @@ Function[chainRec] = function chainRec(f, x) {
 };
 Function implements ChainRec;
 
-export { ChainRec };
+const chainRec = typeRep => (f, chain) => typeRep[ChainRec.chainRec](f, chain);
+
+export { ChainRec, chainRec };

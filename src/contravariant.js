@@ -12,4 +12,6 @@ Function.prototype[Contravariant.contramap] = function contramap(f) {
 };
 Function implements Contravariant;
 
-export { Contravariant };
+const contramap = (f, contravariant) => contravariant[Contravariant.contramap](f);
+
+export { Contravariant, contramap };

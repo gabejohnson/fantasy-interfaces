@@ -21,14 +21,12 @@ protocol Foldable {
   }
 }
 
-const { reduce } = Foldable;
-
-Array.prototype[reduce] = function reduce(f, init) {
+Array.prototype[Foldable.reduce] = function reduce(f, init) {
   return this.reduce((acc, x) => f(acc, x), init);
 };
 Array implements Foldable;
 
-Object.prototype[reduce] = function reduce(f, init) {
+Object.prototype[Foldable.reduce] = function reduce(f, init) {
   return Object
     .keys(this)
     .sort()
@@ -36,4 +34,13 @@ Object.prototype[reduce] = function reduce(f, init) {
 };
 Object implements Foldable;
 
-export { Foldable };
+const reduce = (f, init, foldable) => foldable[Foldable.reduce](f, init);
+const reduceRight = (f, init, foldable) => foldable[Foldable.reduceRight](f, init);
+const reduceMap = (typeRep, f, foldable) => foldable[Foldable.reduceMap](typeRep, f);
+
+export {
+  Foldable
+  reduce,
+  reduceRight,
+  reduceMap
+};

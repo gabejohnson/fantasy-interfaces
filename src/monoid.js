@@ -8,15 +8,15 @@ protocol Monoid extends Semigroup {
   static empty;
 }
 
-const { empty } = Monoid;
-
-String[empty] = () => "";
+String[Monoid.empty] = () => "";
 String implements Monoid;
 
-Array[empty] = () => [];
+Array[Monoid.empty] = () => [];
 Array implements Monoid;
 
-Object[empty] = () => ({});
+Object[Monoid.empty] = () => ({});
 Object implements Monoid;
 
-export { Monoid };
+const empty = typeRep => typeRep[Monoid.empty]();
+
+export { Monoid, empty };

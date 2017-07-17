@@ -12,14 +12,14 @@ protocol Applicative extends Apply {
   }
 }
 
-const { of } = Applicative;
-
-Array[of] = function of(a) {
+Array[Applicative.of] = function of(a) {
   return [a];
 };
 Array implements Applicative;
 
-Function[of] = x => _ => x;
+Function[Applicative.of] = x => _ => x;
 Function implements Applicative;
 
-export { Applicative };
+const of = typeRep => v => typeRep[Applicative.of](v);
+
+export { Applicative, of };

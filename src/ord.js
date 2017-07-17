@@ -4,21 +4,29 @@ import { implements, protocol } from 'sweet-interfaces';
 import { Setoid } from './setoid';
 
 protocol Ord extends Setoid {
-  // lte :: Setoid a => a ~> a -> Boolean
+  // lte :: Ord a, b => a ~> b -> Boolean
   lte(b) { return this.valueOf() <= b.valueOf(); }
+
+  // lt :: Ord a, b => a ~> b -> Boolean
+  lt(b) { return this[Ord.lte](b) && !this[Setoid.equals](b); }
+
+  // gt :: Ord a, b => a ~> b -> Boolean
+  gt(b) { return !this[Ord.lte](b); }
+
+  // gte :: Ord a, b => a ~> b -> Boolean
+  gte(b) { return !this[Ord.lt](b); }
+
   [Setoid.equals](b) {
     return this[Ord.lte](b) && b[Ord.lte](this);
   }
 }
 
-const { lte } = Ord;
-
-Boolean.prototype[lte] = function lte(b) {
+Boolean.prototype[Ord.lte] = function lte(b) {
   return this === false || b === true;
 };
 Boolean implements Ord;
 
-Number.prototype[lte] = function lte(b) {
+Number.prototype[Ord.lte] = function lte(b) {
   return this <= b || isNaN(this) && isNaN(b);
 };
 Number implements Ord;
@@ -27,12 +35,12 @@ Date implements Ord;
 
 String implements Ord;
 
-Error.prototype[lte] = function lte(b) {
+Error.prototype[Ord.lte] = function lte(b) {
   return this.name[lte](b.name) && this.message[lte](b.message);
 }
 Error implements Ord;
 
-Array.prototype[lte] =  function lte(b) {
+Array.prototype[Ord.lte] =  function lte(b) {
   for (let idx = 0; true; idx += 1) {
     if (idx === this.length) return true;
     if (idx === b.length) return false;
@@ -41,7 +49,7 @@ Array.prototype[lte] =  function lte(b) {
 };
 Array implements Setoid;
 
-Object.prototype[lte] = function lte(b) {
+Object.prototype[Ord.lte] = function lte(b) {
   const theseKeys = Object.keys(this).sort();
   const otherKeys = Object.keys(b).sort();
   while (true) {
@@ -56,4 +64,15 @@ Object.prototype[lte] = function lte(b) {
 };
 Object implements Ord;
 
-export { Ord };
+const lte = (a, b) => a[Ord.lte](b);
+const lt = (a, b) => a[Ord.lt](b);
+const gt = (a, b) => a[Ord.gt](b);
+const gte = (a, b) => a[Ord.gte](b);
+
+export {
+  Ord,
+  lte,
+  lt,
+  gt,
+  gte
+};

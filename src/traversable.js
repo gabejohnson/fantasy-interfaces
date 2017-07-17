@@ -2,7 +2,7 @@
 
 import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
-import { Apply } from './apply';
+import { Apply, lift } from './apply';
 import { Applicative } from './applicative';
 import { Foldable } from './foldable';
 
@@ -18,21 +18,18 @@ protocol Traversable extends Functor, Foldable {
   }
 }
 
-const { traverse } = Traversable;
-const { lift } = Apply;
-
 const concat = a => b => a[Semigroup.concat](b);
 const pair = x => y => [x, y];
 
-Array.prototype[traverse] = function traverse(typeRep, f) {
+Array.prototype[Traversable.traverse] = function traverse(typeRep, f) {
   const xs = this;
   function go(idx, n) {
     switch (n) {
       case 0: return typeRep[Applicative.of]([]);
-      case 2: return lift(pair, f(xs[idx]), f(xs[idx + 1]));
+      case 2: return lift(typeRep, pair, f(xs[idx]), f(xs[idx + 1]));
       default:
         const m = Math.floor(n / 4) * 2;
-        return lift(concat, go(idx, m), go(idx + m, n - m));
+        return lift(typeRep, concat, go(idx, m), go(idx + m, n - m));
     }
   }
   return this.length % 2 === 1 ?
@@ -41,7 +38,7 @@ Array.prototype[traverse] = function traverse(typeRep, f) {
 };
 Array implements Traversable;
 
-Object.prototype[traverse] =   function traverse(typeRep, f) {
+Object.prototype[Traversable.traverse] =   function traverse(typeRep, f) {
   return Object
     .keys(this)
     .reduce((applicative, k) => lift(o => v => (o[k] = v, o), applicative, f(this[k]))
@@ -49,4 +46,11 @@ Object.prototype[traverse] =   function traverse(typeRep, f) {
 }
 Object implements Traversable;
 
-export { Traversable };
+const traverse = (typeRep, f, traversable) => traversable[Traversable.traverse](typeRep, f);
+const sequence = (typeRep, traversable) => traversable[Traversable.sequence](typeRep);
+
+export {
+  Traversable,
+  traverse,
+  sequence
+};

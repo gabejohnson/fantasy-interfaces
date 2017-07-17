@@ -16,22 +16,27 @@ protocol Extend extends Functor {
   }
 }
 
-const { extend, duplicate } = Extend;
-
-Array.prototype[extend] = function extend(f) {
+Array.prototype[Extend.extend] = function extend(f) {
   return this.map((_, idx, xs) => f(xs.slice(idx)));
 };
-Array.prototype[duplicate] = function duplicate() {
+Array.prototype[Extend.duplicate] = function duplicate() {
   return this.map((_, idx, xs) => xs.slice(idx));
 };
 Array implements Extend;
 
-Function.prototype[extend] = function extend(f) {
+Function.prototype[Extend.extend] = function extend(f) {
   return x => f(y => this(x.concat(y)));
 };
-Function.prototype[duplicate] = function duplicate() {
+Function.prototype[Extend.duplicate] = function duplicate() {
   return x => y => this(x.concat(y));
 };
 Function implements Extend;
 
-export { Extend };
+const extend = (f, ext) => ext[Extend.extend](f);
+const duplicate = ext => ext[Extend.duplicate]();
+
+export {
+  Extend,
+  extend,
+  duplicate
+};

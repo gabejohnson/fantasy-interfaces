@@ -12,4 +12,6 @@ Function.prototype[Semigroupoid.compose] = function compose(g) {
 };
 Function implements Semigroupoid;
 
-export { Semigroupoid };
+const compose = (f, g) => g[Semigroupoid.compose](f);
+
+export { Semigroupoid, compose };

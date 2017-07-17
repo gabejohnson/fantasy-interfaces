@@ -40,4 +40,15 @@ Function.prototype[Profunctor.rmap] = Function.prototype[Functor.map];
 
 Function implements Profunctor;
 
-export { Profunctor };
+const promap = (f, g, profunctor) => profunctor[Profunctor.promap](f, g);
+const lmap = (f, profunctor) => profunctor[Profunctor.lmap](f);
+const rmap = (f, profunctor) => profunctor[Profunctor.rmap](f);
+const arr = typeRep => f => typeRep[Profunctor.arr](f);
+
+export {
+  Profunctor,
+  promap,
+  lmap,
+  rmap,
+  arr
+};

@@ -3,7 +3,7 @@
 import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 
-export protocol Bifunctor extends Functor {
+protocol Bifunctor extends Functor {
   // bimap :: Bifunctor f => f a c ~> (a -> b, c -> d) -> f b d
   bimap(f, g) {
     return this[Bifunctor.first](f)[Bifunctor.second](g);
@@ -21,3 +21,14 @@ export protocol Bifunctor extends Functor {
 
   [Functor.map](f) { return this[Bifunctor.bimap](identity, f); }
 }
+
+const bimap = (f, g, bifunctor) => bifunctor[Bifunctor.bimap](f, g);
+const first = (f, bifunctor) => bifunctor[Bifunctor.first](f);
+const second = (f, bifunctor) => bifunctor[Bifunctor.second](f);
+
+export {
+  Bifunctor,
+  bimap,
+  first,
+  second,
+};

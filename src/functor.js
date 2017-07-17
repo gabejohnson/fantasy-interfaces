@@ -24,4 +24,6 @@ Function.prototype[Functor.map] = function map(f) {
 };
 Function implements Functor;
 
-export { Functor };
+const map = (f, functor) => functor[Functor.map](f);
+
+export { Functor, map };

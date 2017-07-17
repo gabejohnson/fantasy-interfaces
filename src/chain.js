@@ -21,8 +21,6 @@ protocol Chain extends Apply {
   }
 }
 
-const { chain } = Chain;
-
 Array.prototype[chain] = function chain(f) {
   const result = [];
   this.forEach(x => Array.prototype.push.apply(result, f(x)));
@@ -35,4 +33,11 @@ Function.prototype[chain] = function chain(f) {
 };
 Function implements Chain;
 
-export { Chain };
+const chain = (f, ch) => ch[Chain.chain](f);
+const join = ch => ch[Chain.join]();
+
+export {
+  Chain,
+  chain,
+  join
+};

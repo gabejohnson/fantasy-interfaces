@@ -21,4 +21,6 @@ Object.prototype[Semigroup.concat] = function concat(b) {
 };
 Object implements Semigroup;
 
-export { Semigroup };
+const concat = (a, b) => a[Semigroup.concat](b);
+
+export { Semigroup, concat };

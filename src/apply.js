@@ -29,9 +29,7 @@ protocol Apply extends Functor {
   }
 }
 
-const { ap } = Apply;
-
-Array.prototype[ap] = function ap(fs) {
+Array.prototype[Apply.ap] = function ap(fs) {
   const result = [];
   for (let idx = 0; idx < fs.length; idx += 1) {
     for (let idx2 = 0; idx2 < this.length; idx2 += 1) {
@@ -42,16 +40,26 @@ Array.prototype[ap] = function ap(fs) {
 };
 Array implements Apply;
 
-Object.prototype[ap] = function ap(b) {
+Object.prototype[Apply.ap] = function ap(b) {
   var result = {};
   for (let k in this) if (k in b) result[k] = b[k](this[k]);
   return result;
 };
 Object implements Apply;
 
-Function.prototype[ap] = function ap(f) {
+Function.prototype[Apply.ap] = function ap(f) {
   return x => f(x)(this(x));
 };
 Function implements Apply;
 
-export { Apply };
+const ap = (f, other) => other[Apply.ap](f);
+const apFirst = (a, b) => b[Apply.apFirst](a);
+const apSecond = (a, b) => b[Apply.apSecond](a);
+const lift = typeRep => (f, a, ...bs) => typeRep[Apply.lift](f, a, ...bs);
+export {
+  Apply,
+  ap,
+  apFirst,
+  apSecond,
+  lift
+};

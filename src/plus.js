@@ -15,4 +15,6 @@ Array implements Plus;
 Object[Plus.zero] = Object[Monoid.empty];
 Object implements Plus;
 
-export { Plus };
+const zero = typeRep => typeRep[Plus.zero]();
+
+export { Plus, zero };
