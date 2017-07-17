@@ -1,9 +1,9 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Setoid } from './setoid';
 
-interface Ord extends Setoid {
+protocol Ord extends Setoid {
   // lte :: Setoid a => a ~> a -> Boolean
   lte(b) { return this.valueOf() <= b.valueOf(); }
   [Setoid.equals](b) {

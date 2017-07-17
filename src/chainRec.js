@@ -1,9 +1,9 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Chain } from './chain';
 
-interface ChainRec extends Chain {
+protocol ChainRec extends Chain {
   // chainRec :: ChainRec m => ((a -> c, b -> c, a) -> m c, a) -> m b
   static chainRec;
 }

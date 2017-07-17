@@ -1,9 +1,9 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 
-export interface Bifunctor extends Functor {
+export protocol Bifunctor extends Functor {
   // bimap :: Bifunctor f => f a c ~> (a -> b, c -> d) -> f b d
   bimap(f, g) {
     return this[Bifunctor.first](f)[Bifunctor.second](g);

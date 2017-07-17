@@ -1,8 +1,8 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 
-interface Semigroup {
+protocol Semigroup {
   // concat :: Semigroup a => a ~> a -> a
   concat(b) {
     return this.concat(b);

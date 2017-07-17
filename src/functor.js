@@ -1,14 +1,14 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 
-interface Functor {
+protocol Functor {
   // map :: Functor f => f a ~> (a -> b) -> f b
   map;
 }
 
 Array.prototype[Functor.map] = function map(f) {
-  return this.map(x => f(x));
+  return this.map(f);
 };
 Array implements Functor;
 

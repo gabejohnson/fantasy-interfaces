@@ -1,9 +1,9 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Semigroup } from './semigroup';
 
-interface Monoid extends Semigroup {
+protocol Monoid extends Semigroup {
   // empty :: Monoid m => () -> m
   static empty;
 }

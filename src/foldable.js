@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 
 const flip = f => (a, b) => f(b, a);
 
-interface Foldable {
+protocol Foldable {
   // reduce :: Foldable f => f a ~> ((b, a) -> b, b) -> b
   reduce(f, init) {
     this[Foldable.reduceRight](flip(f), init);

@@ -28,7 +28,7 @@
   "homepage": "https://github.com/gabejohnson/fantasy-interfaces#readme",
   "dependencies": {
     "@sweet-js/cli": "^3.0.11",
-    "sweet-interfaces": "^0.2.0"
+    "sweet-interfaces": "^0.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

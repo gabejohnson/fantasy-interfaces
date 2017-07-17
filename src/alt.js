@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Semigroup } from './semigroup';
 
-interface Alt extends Functor {
+protocol Alt extends Functor {
   // alt :: Alt f => f a ~> f a -> f a
   alt;
 }

@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Chain } from './chain';
 
-interface Monad extends Applicative, Chain {
+protocol Monad extends Applicative, Chain {
   [Functor.map](f) {
     return this[Chain.chain](a => this.constructor[Applicative.of](f(a)));
   }

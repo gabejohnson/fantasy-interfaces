@@ -1,12 +1,12 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Apply } from './apply';
 import { Applicative } from './applicative';
 import { Foldable } from './foldable';
 
-interface Traversable extends Functor, Foldable {
+protocol Traversable extends Functor, Foldable {
   // traverse :: Applicative f, Traversable t => t a ~> (TypeRep f, a -> f b) -> f (t b)
   traverse(typeRep, f) {
     return this[Functor.map](f).sequence(typeRep);

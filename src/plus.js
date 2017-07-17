@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Alt } from './alt';
 import { Monoid } from './monoid';
 
-interface Plus extends Alt {
+protocol Plus extends Alt {
   // zero :: Plus f => () -> f a
   static zero;
 }

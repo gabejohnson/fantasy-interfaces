@@ -1,8 +1,8 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 
-interface Semigroupoid {
+protocol Semigroupoid {
   // compose :: Semigroupoid c => c i j ~> c j k -> c i k
   compose;
 }

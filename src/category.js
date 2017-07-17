@@ -1,9 +1,9 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import Semigroupoid from './semigroupoid';
 
-interface Category extends Semigroupoid {
+protocol Category extends Semigroupoid {
   static id;
 }
 

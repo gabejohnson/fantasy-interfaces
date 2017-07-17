@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { implements, interface } from 'sweet-interfaces';
+import { implements, protocol } from 'sweet-interfaces';
 import { Apply } from './apply';
 import { Functor } from './functor';
 
-interface Applicative extends Apply {
+protocol Applicative extends Apply {
   // of :: Applicative f => a -> f a
   static of;
   [Functor.map](f) {

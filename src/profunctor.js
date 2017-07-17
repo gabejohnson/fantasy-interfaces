@@ -1,12 +1,12 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Category } from './category';
 
 const identity = Function[Category.id]();
 
-interface Profunctor extends Functor {
+protocol Profunctor extends Functor {
   // promap :: Profunctor p => p b c ~> (a -> b, c -> d) -> p a d
   promap(f, g) {
     return this[Profunctor.lmap](f)[Profunctor.rmap](g);

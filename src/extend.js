@@ -1,10 +1,10 @@
 'lang sweet.js';
 
-import { interface, implements } from 'sweet-interfaces';
+import { protocol, implements } from 'sweet-interfaces';
 import { Functor } from './functor';
 import { Category } from './category';
 
-interface Extend extends Functor {
+protocol Extend extends Functor {
   // extend :: Extend w => w a ~> (w a -> b) -> w b
   extend(f) {
     return this[Extend.duplicate]()[Functor.map](f);
