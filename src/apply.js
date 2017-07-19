@@ -15,7 +15,7 @@ protocol Apply extends Functor {
   // lift :: Apply f => (a -> b -> ... -> c) -> f a -> f b -> ... -> f c
   static lift(f, a, ...bs) {
     const result = a[Functor.map](f);
-    return bs.slice.reduce((f, a) => a[Apply.ap](f), result);
+    return bs.reduce((f, a) => a[Apply.ap](f), result);
   }
 
   // apFirst :: Apply f => f a ~> f b -> f a
