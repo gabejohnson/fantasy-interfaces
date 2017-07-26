@@ -21,14 +21,14 @@ protocol Chain extends Apply {
   }
 }
 
-Array.prototype[chain] = function chain(f) {
+Array.prototype[Chain.chain] = function chain(f) {
   const result = [];
   this.forEach(x => Array.prototype.push.apply(result, f(x)));
   return result;
 };
 Reflect.implement(Array, Chain);
 
-Function.prototype[chain] = function chain(f) {
+Function.prototype[Chain.chain] = function chain(f) {
   return x => f(this(x))(x);
 };
 Reflect.implement(Function, Chain);
