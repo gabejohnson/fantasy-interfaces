@@ -22,7 +22,7 @@ Array.prototype[Extend.extend] = function extend(f) {
 Array.prototype[Extend.duplicate] = function duplicate() {
   return this.map((_, idx, xs) => xs.slice(idx));
 };
-Array implements Extend;
+Reflect.implement(Array, Extend);
 
 Function.prototype[Extend.extend] = function extend(f) {
   return x => f(y => this(x.concat(y)));
@@ -30,7 +30,7 @@ Function.prototype[Extend.extend] = function extend(f) {
 Function.prototype[Extend.duplicate] = function duplicate() {
   return x => y => this(x.concat(y));
 };
-Function implements Extend;
+Reflect.implement(Function, Extend);
 
 const extend = (f, ext) => ext[Extend.extend](f);
 const duplicate = ext => ext[Extend.duplicate]();

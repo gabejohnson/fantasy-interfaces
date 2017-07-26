@@ -6,7 +6,7 @@ import { Applicative } from './applicative';
 
 protocol Alternative extends Applicative, Plus {}
 
-Array implements Alternative;
-Object implements Alternative;
+Reflect.implement(Array, Alternative);
+Reflect.implement(Object, Alternative);
 
 export { Alternative };

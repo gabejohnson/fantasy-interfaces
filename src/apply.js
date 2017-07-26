@@ -38,19 +38,19 @@ Array.prototype[Apply.ap] = function ap(fs) {
   }
   return result;
 };
-Array implements Apply;
+Reflect.implement(Array, Apply);
 
 Object.prototype[Apply.ap] = function ap(b) {
   var result = {};
   for (let k in this) if (k in b) result[k] = b[k](this[k]);
   return result;
 };
-Object implements Apply;
+Reflect.implement(Object, Apply);
 
 Function.prototype[Apply.ap] = function ap(f) {
   return x => f(x)(this(x));
 };
-Function implements Apply;
+Reflect.implement(Function, Apply);
 
 const ap = (f, other) => other[Apply.ap](f);
 const apFirst = (a, b) => b[Apply.apFirst](a);

@@ -10,7 +10,7 @@ protocol Contravariant {
 Function.prototype[Contravariant.contramap] = function contramap(f) {
   return x => this(f(x));
 };
-Function implements Contravariant;
+Reflect.implement(Function, Contravariant);
 
 const contramap = (f, contravariant) => contravariant[Contravariant.contramap](f);
 

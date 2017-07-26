@@ -39,15 +39,15 @@ Array.prototype[Traversable.traverse] = function traverse(typeRep, f) {
     lift(concat, f(this[0])[Functor.map](Array[Applicative.of]), go(1, this.length - 1)) :
     go(0, this.length);
 };
-Array implements Traversable;
+Reflect.implement(Array, Traversable);
 
-Object.prototype[Traversable.traverse] =   function traverse(typeRep, f) {
+Object.prototype[Traversable.traverse] = function traverse(typeRep, f) {
   return Object
     .keys(this)
     .reduce((applicative, k) => lift(o => v => (o[k] = v, o), applicative, f(this[k]))
             , typeRep[Applicative.of]({}));
-}
-Object implements Traversable;
+};
+Reflect.implement(Object, Traversable);
 
 const traverse = (typeRep, f, traversable) => traversable[Traversable.traverse](typeRep, f);
 const sequence = (typeRep, traversable) => traversable[Traversable.sequence](typeRep);

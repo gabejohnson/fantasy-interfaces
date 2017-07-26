@@ -9,8 +9,8 @@ protocol Semigroup {
   }
 }
 
-String implements Semigroup;
-Array implements Semigroup;
+Reflect.implement(String, Semigroup);
+Reflect.implement(Array, Semigroup);
 
 Object.prototype[Semigroup.concat] = function concat(b) {
   const result = {};
@@ -19,7 +19,7 @@ Object.prototype[Semigroup.concat] = function concat(b) {
   for (k in b) result[k] = b[k];
   return result;
 };
-Object implements Semigroup;
+Reflect.implement(Object, Semigroup);
 
 const concat = (a, b) => a[Semigroup.concat](b);
 

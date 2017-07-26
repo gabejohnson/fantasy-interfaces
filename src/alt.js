@@ -10,10 +10,10 @@ protocol Alt extends Functor {
 }
 
 Array.prototype[Alt.alt] = Array.prototype[Semigroup.concat];
-Array implements Alt;
+Reflect.implement(Array, Alt);
 
 Object.prototype[Alt.alt] = Object.prototype[Semigroup.concat];
-Object implements Alt;
+Reflect.implement(Object, Alt);
 
 const alt = (a, b) => a[Alt.alt](b);
 

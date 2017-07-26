@@ -24,21 +24,21 @@ protocol Ord extends Setoid {
 Boolean.prototype[Ord.lte] = function lte(b) {
   return this === false || b === true;
 };
-Boolean implements Ord;
+Reflect.implement(Boolean, Ord);
 
 Number.prototype[Ord.lte] = function lte(b) {
   return this <= b || isNaN(this) && isNaN(b);
 };
-Number implements Ord;
+Reflect.implement(Number, Ord);
 
-Date implements Ord;
+Reflect.implement(Date, Ord);
 
-String implements Ord;
+Reflect.implement(String, Ord);
 
 Error.prototype[Ord.lte] = function lte(b) {
   return this.name[lte](b.name) && this.message[lte](b.message);
-}
-Error implements Ord;
+};
+Reflect.implement(Error, Ord);
 
 Array.prototype[Ord.lte] =  function lte(b) {
   for (let idx = 0; true; idx += 1) {
@@ -47,7 +47,7 @@ Array.prototype[Ord.lte] =  function lte(b) {
     if (this[idx][Setoid.equals](b[idx])) return this[idx][lte](b[idx]);
   }
 };
-Array implements Setoid;
+Reflect.implement(Array, Setoid);
 
 Object.prototype[Ord.lte] = function lte(b) {
   const theseKeys = Object.keys(this).sort();
@@ -62,7 +62,7 @@ Object.prototype[Ord.lte] = function lte(b) {
     if (!this[k][Setoid.equals](other[k])) return this[k][lte](b[k]);
   }
 };
-Object implements Ord;
+Reflect.implement(Object, Ord);
 
 const lte = (a, b) => a[Ord.lte](b);
 const lt = (a, b) => a[Ord.lt](b);

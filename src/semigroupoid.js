@@ -10,7 +10,7 @@ protocol Semigroupoid {
 Function.prototype[Semigroupoid.compose] = function compose(g) {
   return x => g(this(x));
 };
-Function implements Semigroupoid;
+Reflect.implement(Function, Semigroupoid);
 
 const compose = (f, g) => g[Semigroupoid.compose](f);
 

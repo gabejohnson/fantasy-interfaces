@@ -15,10 +15,10 @@ protocol Applicative extends Apply {
 Array[Applicative.of] = function of(a) {
   return [a];
 };
-Array implements Applicative;
+Reflect.implement(Array, Applicative);
 
 Function[Applicative.of] = x => _ => x;
-Function implements Applicative;
+Reflect.implement(Function, Applicative);
 
 const of = typeRep => v => typeRep[Applicative.of](v);
 

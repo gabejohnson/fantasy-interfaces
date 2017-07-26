@@ -26,12 +26,12 @@ Array.prototype[chain] = function chain(f) {
   this.forEach(x => Array.prototype.push.apply(result, f(x)));
   return result;
 };
-Array implements Chain;
+Reflect.implement(Array, Chain);
 
 Function.prototype[chain] = function chain(f) {
   return x => f(this(x))(x);
 };
-Function implements Chain;
+Reflect.implement(Function, Chain);
 
 const chain = (f, ch) => ch[Chain.chain](f);
 const join = ch => ch[Chain.join]();

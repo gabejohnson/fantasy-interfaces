@@ -10,7 +10,7 @@ protocol Monad extends Applicative, Chain {
   }
 }
 
-Array implements Monad;
-Function implements Monad;
+Reflect.implement(Array, Monad);
+Reflect.implement(Function, Monad);
 
 export { Monad };

@@ -9,13 +9,13 @@ protocol Monoid extends Semigroup {
 }
 
 String[Monoid.empty] = () => "";
-String implements Monoid;
+Reflect.implement(String, Monoid);
 
 Array[Monoid.empty] = () => [];
-Array implements Monoid;
+Reflect.implement(Array, Monoid);
 
 Object[Monoid.empty] = () => ({});
-Object implements Monoid;
+Reflect.implement(Object, Monoid);
 
 const empty = typeRep => typeRep[Monoid.empty]();
 

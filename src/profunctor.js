@@ -38,7 +38,7 @@ Function.prototype[Profunctor.promap] = function promap(f, g) {
 Function.prototype[Profunctor.lmap] = Function.prototype[Contravariant.contramap];
 Function.prototype[Profunctor.rmap] = Function.prototype[Functor.map];
 
-Function implements Profunctor;
+Reflect.implement(Function, Profunctor);
 
 const promap = (f, g, profunctor) => profunctor[Profunctor.promap](f, g);
 const lmap = (f, profunctor) => profunctor[Profunctor.lmap](f);

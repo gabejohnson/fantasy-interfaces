@@ -10,10 +10,10 @@ protocol Plus extends Alt {
 }
 
 Array[Plus.zero] = Array[Monoid.empty];
-Array implements Plus;
+Reflect.implement(Array, Plus);
 
 Object[Plus.zero] = Object[Monoid.empty];
-Object implements Plus;
+Reflect.implement(Object, Plus);
 
 const zero = typeRep => typeRep[Plus.zero]();
 

@@ -27,7 +27,7 @@ Array[ChainRec.chainRec] = function chainRec(f, x) {
   }
   return complete;
 };
-Array implements ChainRec;
+Reflect.implement(Array, ChainRec);
 
 Function[ChainRec.chainRec] = function chainRec(f, x) {
   return a => {
@@ -36,7 +36,7 @@ Function[ChainRec.chainRec] = function chainRec(f, x) {
     return value;
   };
 };
-Function implements ChainRec;
+Reflect.implement(Function, ChainRec);
 
 const chainRec = typeRep => (f, chain) => typeRep[ChainRec.chainRec](f, chain);
 

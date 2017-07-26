@@ -24,7 +24,7 @@ protocol Foldable {
 Array.prototype[Foldable.reduce] = function reduce(f, init) {
   return this.reduce((acc, x) => f(acc, x), init);
 };
-Array implements Foldable;
+Reflect.implement(Array, Foldable);
 
 Object.prototype[Foldable.reduce] = function reduce(f, init) {
   return Object
@@ -32,7 +32,7 @@ Object.prototype[Foldable.reduce] = function reduce(f, init) {
     .sort()
     .reduce((acc, k) => f(acc, this[k]), init);
 };
-Object implements Foldable;
+Reflect.implement(Object, Foldable);
 
 const reduce = (f, init, foldable) => foldable[Foldable.reduce](f, init);
 const reduceRight = (f, init, foldable) => foldable[Foldable.reduceRight](f, init);

@@ -10,19 +10,19 @@ protocol Functor {
 Array.prototype[Functor.map] = function map(f) {
   return this.map(f);
 };
-Array implements Functor;
+Reflect.implement(Array, Functor);
 
 Object.prototype[Functor.map] = function map(f) {
   var result = {};
   for (var k in this) result[k] = f(this[k]);
   return result;
 };
-Object implements Functor;
+Reflect.implement(Object, Functor);
 
 Function.prototype[Functor.map] = function map(f) {
   return x => f(this(x));
 };
-Function implements Functor;
+Reflect.implement(Function, Functor);
 
 const map = (f, functor) => functor[Functor.map](f);
 

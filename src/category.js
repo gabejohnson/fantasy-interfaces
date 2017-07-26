@@ -8,7 +8,7 @@ protocol Category extends Semigroupoid {
 }
 
 Function[Category.id] = x => x;
-Function implements Category;
+Reflect.implement(Function, Category);
 
 const id = typeRep => typeRep[Category.id];
 
